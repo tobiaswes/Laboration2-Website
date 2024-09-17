@@ -56,4 +56,8 @@ public class VideoService {
             throw new RuntimeException("Video not found by id:" + id);
         }
     }
+    //sök efter video titeln
+    public List<Video> searchVideosByTitle(String keyword) {
+        return videoRepository.searchByTitle(keyword);
+    }
 }

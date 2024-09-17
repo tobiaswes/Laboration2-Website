@@ -43,6 +43,14 @@ public class VideoController {
 
     @DeleteMapping("/{id}")
     public void deleteVideo(@PathVariable Long id){
+
         videoService.deleteVideo(id);
     }
+
+    @GetMapping("/search")
+    public List<Video> searchVideos(@RequestParam("q") String query) {
+        return videoService.searchVideosByTitle(query);
+    }
 }
+
+
