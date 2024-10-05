@@ -1,0 +1,48 @@
+h2 {
+  color: white;
+}
+
+.video-list {
+  display: flex;            // Use Flexbox
+  flex-direction: column;   // Stack items vertically
+  align-items: center;      // Center items horizontally
+  justify-content: center;   // Center items vertically (if the container has height)
+  padding: 20px;
+}
+
+.video-container {
+  display: flex; // Use flexbox for vertical stacking of items
+  flex-direction: column; // Stack video items vertically
+  background: #80b8ff;
+}
+
+.video-item {
+  padding: 10px;
+  border: 1px solid #ddd; // Light border around each video
+  border-radius: 5px; // Rounded corners
+  margin-bottom: 0px; // Space between video items
+}
+
+.video-title {
+  margin-bottom: 10px; // Space below title
+}
+
+.video-details {
+  display: flex; // Use flexbox for details in a row
+  align-items: center; // Center items vertically
+}
+
+.video-addded-by,
+.video-category,
+.video-description,
+.video-link {
+  margin-right: 15px; // Space between details
+}
+
+.video-link {
+  text-decoration: underline; // Underline for link
+}
+
+h3{
+  font-size: 18px;
+}

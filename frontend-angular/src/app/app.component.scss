@@ -1,0 +1,49 @@
+
+h2 {
+  color: white;
+}
+.category-nav {
+  background-color: #333; /* Background color of the nav bar */
+  padding: 10px 0;
+  text-align: center;
+}
+
+.nav-list a {
+  color: inherit; /* Keeps the link color the same as the parent element's color */
+  text-decoration: none; /* Removes the underline */
+}
+
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Space between category items */
+}
+
+.nav-item {
+  color: white;
+  cursor: pointer;
+  padding: 10px 15px;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.nav-item:hover {
+  background-color: #555; /* Hover effect */
+}
+
+.body{
+  background-image: url('assets/images/library.jpg'); // Update with the correct path
+  background-size: cover; // Cover the entire header
+  background-position: center; // Center the image
+  background-repeat: no-repeat; // Prevent repeating
+  //height: 200px; // Set a height for the header
+}
+
+h3{
+  font-size: 18px;
+}

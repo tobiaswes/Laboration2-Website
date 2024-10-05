@@ -1,0 +1,22 @@
+<app-navbar></app-navbar>
+
+<div class="video-list">
+  <h2>Video List</h2>
+  <div class="video-container">
+    <!-- Updated to use filteredVideos instead of videos -->
+    <div *ngFor="let video of filteredVideos" class="video-item">
+      <h3 class="video-title">{{ video.title }}</h3>
+      <div class="video-details">
+        <a class="video-link" [href]="video.link" target="_blank">Watch Video</a>
+        <span class="video-category"><strong>Category:</strong> {{ video.category }}</span>
+        <span class="video-added-by"><strong>Added By:</strong> {{ video.addedBy }}</span>
+        <span class="video-description"><strong>Description:</strong> {{ video.description }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="filteredVideos.length === 0">
+  <p>No videos found for the selected category.</p>
+</div>
+

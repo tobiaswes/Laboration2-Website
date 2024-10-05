@@ -26,8 +26,8 @@ public class Video {
     @Column(name = "upload_date", nullable = false)
     private LocalDateTime uploadDate;
 
-    @Column(name = "uploaded_by", nullable = false)
-    private String uploadedBy;
+    @Column(name = "Added_by", nullable = false)
+    private String addedBy;
 
     @Column(nullable = false)
     private String category;

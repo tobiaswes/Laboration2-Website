@@ -1,0 +1,31 @@
+<div class="header">
+  <h1 class="title" (click)="goHome()">Archive_166</h1>
+  <div class="header-right">
+    <!-- Search Bar Container -->
+    <div class="search-container">
+      <input
+        type="text"
+        placeholder="Search videos..."
+        class="search-input"
+      />
+    </div>
+
+    <!-- Check if the user is logged in -->
+    <ng-container *ngIf="isLoggedIn; else loginButton">
+      <!-- Display the username as a link -->
+      <a class="user-link" >
+        {{ username }}
+      </a>
+      <button class="login-button" (click)="navigateToLogin()">
+        Sign Out
+      </button>
+    </ng-container>
+
+    <ng-template #loginButton>
+      <button class="login-button" (click)="navigateToLogin()">
+        Log in
+      </button>
+    </ng-template>
+  </div>
+</div>
+

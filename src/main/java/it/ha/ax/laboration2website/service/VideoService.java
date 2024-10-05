@@ -26,19 +26,19 @@ public class VideoService {
 
     //ladda up ny video
 
-    public Video createVideo(String title, String link, String uploadedBy, String category, String description){
-        Video video = new Video(null, title, link, LocalDateTime.now(), uploadedBy, category, description);
+    public Video createVideo(String title, String link, String addedBy, String category, String description){
+        Video video = new Video(null, title, link, LocalDateTime.now(), addedBy, category, description);
         return videoRepository.save(video);
     }
     //uppdatera en video
-    public Video updateVideo(Long id, String title, String link, String uploadedBy, String category, String description){
+    public Video updateVideo(Long id, String title, String link, String addedBy, String category, String description){
         Optional<Video> existingVideo = videoRepository.findById(id);
 
         if(existingVideo.isPresent()){
             Video video = existingVideo.get();
             video.setTitle(title);
             video.setLink(link);
-            video.setUploadedBy(uploadedBy);
+            video.setAddedBy(addedBy);
             video.setCategory(category);
             video.setDescription(description);
             return videoRepository.save(video);
