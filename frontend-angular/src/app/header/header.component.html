@@ -13,7 +13,8 @@
     <!-- Check if the user is logged in -->
     <ng-container *ngIf="isLoggedIn; else loginButton">
       <!-- Display the username as a link -->
-      <a class="user-link" >
+      <p class="greeting">Hello,</p>
+      <a class="user-link" (click)="userProfile()">
         {{ username }}
       </a>
       <button class="login-button" (click)="navigateToLogin()">

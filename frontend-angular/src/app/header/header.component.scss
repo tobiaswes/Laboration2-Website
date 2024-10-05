@@ -35,11 +35,16 @@
   border-radius: 4px;
   width: 200px;
 }
+.greeting{
+  margin-top: 12px;
+  color: white;
+}
 
 .user-link {
-  padding: 8px 16px; // Optional padding for the link
+  padding: 8px; // Optional padding for the link
+  padding-left: 4px;
   color: white; // Link color
-  margin-right: 12px;
+  margin-right: 14px;
   text-decoration: none; // Remove underline from the link
   background-color: transparent; // No background color
   cursor: pointer; // Change cursor to pointer
@@ -52,14 +57,14 @@
 
 .login-button {
   padding: 8px 16px;
-  background-color: #dc3545; // Color for sign out button
+  background-color: #93440a; // Color for sign out button
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 
   &:hover {
-    background-color: #c82333; // Darker red on hover
+    background-color: #a6460d; // Darker red on hover
   }
 }
 

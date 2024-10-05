@@ -30,4 +30,33 @@ export class VideoService{
     return this.http.get<Video[]>(`${this.baseUrl}/search?q=${query}`);
   }
 
+  getVideosByUser(username: string | null): Observable<Video[]> {
+    return this.http.get<Video[]>(`${this.baseUrl}/user/${username}`);
+  }
+
+  addVideo(video: {
+    addedBy: string;
+    link: string;
+    description: string;
+    title: string;
+    category: string
+  }): Observable<Video> {
+    return this.http.post<Video>(`${this.baseUrl}/upload`, video);
+  }
+
+  updateVideo(video: {
+    addedBy: string;
+    link: string;
+    description: string;
+    id: null;
+    title: string;
+    category: string
+  }): Observable<Video> {
+    return this.http.put<Video>(`${this.baseUrl}/${video.id}`, video);
+  }
+
+  deleteVideo(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  }
+
 }

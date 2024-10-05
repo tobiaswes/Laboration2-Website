@@ -1,0 +1,39 @@
+<h2>User Archive</h2>
+
+<!-- Add/Edit Video Form -->
+<div class="video-form">
+  <h3>{{ isEditing ? 'Edit Video' : 'Add New Video' }}</h3>
+  <input type="text" [(ngModel)]="newVideo.title" placeholder="Video Title" required />
+  <input type="text" [(ngModel)]="newVideo.link" placeholder="Video Link" required />
+
+  <!-- Dropdown for selecting category -->
+  <select [(ngModel)]="newVideo.category" required class="custom-select">
+    <option value="" disabled>Select a category</option>
+    <option value="cat">Cat</option>
+    <option value="educational">Educational</option>
+    <option value="funny">Funny</option>
+    <option value="music">Music</option>
+  </select>
+
+  <textarea [(ngModel)]="newVideo.description" placeholder="Description"></textarea>
+
+  <button (click)="isEditing ? updateVideo() : addVideo()">
+    {{ isEditing ? 'Update Video' : 'Add Video' }}
+  </button>
+</div>
+
+<!-- User's Video List -->
+<h3>Your Videos</h3>
+<div class="video-list">
+  <div *ngFor="let video of userVideos" class="video-item">
+    <h4>{{ video.title }}</h4>
+    <p><strong>Category:</strong> {{ video.category }}</p>
+    <p><strong>Added By:</strong> {{ video.addedBy }}</p>
+    <p><strong>Description:</strong> {{ video.description }}</p>
+    <a [href]="video.link" target="_blank">Watch Video</a>
+
+    <!-- Buttons to edit or delete the video -->
+    <button (click)="editVideo(video)">Edit</button>
+    <button (click)="deleteVideo(video)">Delete</button>
+  </div>
+</div>

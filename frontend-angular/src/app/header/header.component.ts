@@ -39,6 +39,10 @@ export class HeaderComponent {
     return this.userService.getCurrentUser(); // Getter to retrieve the username
   }
 
+  userProfile(): void{
+    this.router.navigate(['/userProfile']);
+  }
+
   onKeydown(event: KeyboardEvent): void {
     if (event.key === 'Enter') {
       this.searchVideos.emit(this.searchTerm);

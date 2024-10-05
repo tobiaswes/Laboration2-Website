@@ -48,6 +48,11 @@ public class VideoController {
         videoService.deleteVideo(id);
     }
 
+    @GetMapping("/user/{username}")
+    public List<Video> getVideosByUser(@PathVariable String username) {
+        return videoService.getVideosByUser(username);
+    }
+
     @GetMapping("/search")
     public List<Video> searchVideos(@RequestParam("q") String query) {
 
