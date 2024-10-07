@@ -1,14 +1,8 @@
 <div class="header">
-  <h1 class="title" (click)="goHome()">Archive_166</h1>
+  <h1 class="title" (click)="goHome()">Archive 9</h1>
   <div class="header-right">
     <!-- Search Bar Container -->
-    <div class="search-container">
-      <input
-        type="text"
-        placeholder="Search videos..."
-        class="search-input"
-      />
-    </div>
+    <app-searchbar (searchEvent)="handleSearch($event)"></app-searchbar>
 
     <!-- Check if the user is logged in -->
     <ng-container *ngIf="isLoggedIn; else loginButton">
@@ -29,4 +23,5 @@
     </ng-template>
   </div>
 </div>
+
 

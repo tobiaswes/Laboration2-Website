@@ -2,6 +2,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service';
+import {Video, VideoService} from "../video.service";
 
 @Component({
   selector: 'app-header',
@@ -11,9 +12,11 @@ import { UserService } from '../user.service';
 export class HeaderComponent {
   searchTerm: string = '';
   isLoggedIn: boolean = false; // Initialize to false
-  @Output() searchVideos: EventEmitter<string> = new EventEmitter<string>(); // Create an EventEmitter
+  filteredVideos: Video[] = [];
+  videos: Video[] = [];
 
-  constructor(private router: Router, private userService: UserService) {}
+  @Output() searchEvent = new EventEmitter<string>();
+  constructor(private router: Router, private userService: UserService, private videoService: VideoService) {}
 
   ngOnInit(): void {
     // Subscribe to the login state observable
@@ -43,9 +46,23 @@ export class HeaderComponent {
     this.router.navigate(['/userProfile']);
   }
 
-  onKeydown(event: KeyboardEvent): void {
-    if (event.key === 'Enter') {
-      this.searchVideos.emit(this.searchTerm);
+  handleSearch(query: string): void {
+    this.searchEvent.emit(query);
+    if (query) {
+      this.videoService.searchVideos(query).subscribe((results) => {
+        console.log('Search results:', results);
+        this.filteredVideos = results; // Update the displayed videos based on search results
+      });
+    } else {
+      this.filteredVideos = this.videos; // Reset to all videos when search query is empty
+      console.log('Reset to all videos:', this.filteredVideos);
     }
   }
+
+  onKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Enter') {
+      this.handleSearch(this.searchTerm); // Use handleSearch to emit the query
+    }
+  }
+
 }

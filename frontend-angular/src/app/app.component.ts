@@ -49,16 +49,14 @@ export class AppComponent implements OnInit {
   filterVideos(category: string): void {
     this.filteredVideos = this.videos.filter((video) => video.category === category);
   }
-  handleSearch(searchTerm: string): void {
-    if (searchTerm) {
-      this.videoService.searchVideos(searchTerm).subscribe({
-        next: (data: Video[]) => {
-          this.filteredVideos = data; // Update filtered videos with search results
-        },
-        error: (error) => console.error('Error searching videos:', error)
-      });
+  handleSearch(query: string): void {
+    if (query) {
+      // Filter videos based on the search query
+      this.filteredVideos = this.videos.filter(video =>
+        video.title.toLowerCase().includes(query.toLowerCase())
+      );
     } else {
-      this.filteredVideos = this.videos; // Show all videos if no search term
+      this.filteredVideos = this.videos;  // Reset to all videos if query is empty
     }
   }
 

@@ -1,0 +1,11 @@
+<!-- searchbar.component.html -->
+<div class="search-container">
+  <input
+    type="text"
+    placeholder="Search videos"
+    [(ngModel)]="searchTerm"
+    (input)="onSearchChange()"
+    class="search-input"
+  />
+</div>
+

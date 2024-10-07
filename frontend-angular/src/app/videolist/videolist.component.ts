@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { Video } from '../video.service'; // Adjust the import path based on your file structure
 import { VideoService } from "../video.service";
 import { Router, ActivatedRoute } from "@angular/router"; // Import ActivatedRoute
@@ -9,13 +9,14 @@ import { Router, ActivatedRoute } from "@angular/router"; // Import ActivatedRou
   styleUrls: ['./videolist.component.scss']
 })
 export class VideoListComponent implements OnInit {
-  videos: Video[] = [];
+  @Input() videos: Video[] = [];
   filteredVideos: Video[] = [];
   categories: string[] = [];
 
   constructor(private videoService: VideoService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    console.log('Videos received in VideoListComponent:', this.videos);
     this.getVideos(); // Fetch videos first
   }
 
@@ -53,5 +54,6 @@ export class VideoListComponent implements OnInit {
     const uniqueCategories = new Set(this.videos.map((video) => video.category));
     this.categories = Array.from(uniqueCategories);
   }
+
 
 }
