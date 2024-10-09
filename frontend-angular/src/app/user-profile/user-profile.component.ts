@@ -13,6 +13,7 @@ export class UserProfileComponent implements OnInit {
     id: null, title: '', link: '', description: '', category: '', addedBy: ''
   }; // New video form
   isEditing: boolean = false; // To track if a video is being edited
+  errorMessage: string = ''; // To hold error messages for invalid links
 
   constructor(private videoService: VideoService, private userService: UserService) {}
 
@@ -32,29 +33,40 @@ export class UserProfileComponent implements OnInit {
   }
 
   addVideo(): void {
+    // Validate the YouTube link before proceeding
+    if (!this.validateVideoLink(this.newVideo.link)) {
+      this.errorMessage = 'Please enter a valid YouTube link starting with https://www.youtube.com/';
+      return; // Stop the execution if the link is invalid
+    }
+
     const username = this.userService.getCurrentUser(); // Get current user's username
     if (typeof username === "string") {
-      this.newVideo.addedBy = username;
-    } // Set the addedBy field
+      this.newVideo.addedBy = username; // Set the addedBy field
+    }
 
     this.videoService.addVideo(this.newVideo).subscribe({
       next: (addedVideo) => {
         this.userVideos.push(addedVideo); // Add the new video to the user's list
         this.newVideo = { id: null, title: '', link: '', description: '', category: '', addedBy: '' }; // Reset the form
+        this.errorMessage = ''; // Clear the error message on successful addition
       },
       error: (error) => console.error('Error adding video:', error)
     });
   }
 
-  updateVideo(): void {
-
+  validateVideoLink(link: string): boolean {
+    const pattern = /^https:\/\/www\.youtube\.com\/.*/; // Regular expression to validate the YouTube link
+    return pattern.test(link);
   }
+
+  updateVideo(): void {
+    // Implement update logic if necessary
+  }
+
   editVideo(video: Video): void {
     this.isEditing = true;
     this.newVideo = { ...video }; // Populate the form with video details for editing
   }
-
-
 
   deleteVideo(video: Video): void {
     this.videoService.deleteVideo(video.id).subscribe({

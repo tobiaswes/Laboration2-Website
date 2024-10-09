@@ -1,8 +1,11 @@
 package it.ha.ax.laboration2website.controller;
 
+import it.ha.ax.laboration2website.ResponseMessage;
 import it.ha.ax.laboration2website.entity.User;
 import it.ha.ax.laboration2website.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,13 +21,17 @@ public class UserController {
 
     // Sign-up endpoint
     @PostMapping("/signup")
-    public User signUpUser(@RequestBody User user) {
-        return userService.registerUser(user);
-    }
-
-    // Get User by username
-    @GetMapping("/{username}")
-    public User getUserByUsername(@PathVariable String username) {
-        return userService.findByUsername(username);
+    public ResponseEntity<?> signUpUser(@RequestBody User user) {
+        try {
+            // Attempt to register the user
+            userService.registerUser(user);
+            // Return success message if registration is successful
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("{\"message\": \"Sign-up successful\"}");
+        } catch (Exception e) {
+            // Return an error message if there is a duplicate username
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("{\"message\": \"" + e.getMessage() + "\"}");
+        }
     }
 }

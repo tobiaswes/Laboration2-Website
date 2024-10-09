@@ -44,11 +44,11 @@ h3 {
 
 /* Video Item Styling */
 .video-list {
-  max-height: 420px; /* Set a maximum height for the scrollable area */
+  max-height: 434px; /* Set a maximum height for the scrollable area */
   overflow-y: scroll; /* Enable vertical scrolling */
-  padding: 10px; /* Add some padding */
-  border: 1px solid #ddd; /* Optional: add a border */
-  background-color: #f9f9f9; /* Optional: background color */
+  padding: 0px; /* Add some padding */
+   /* Optional: add a border */
+  background-color: #80b8ff; /* Optional: background color */
 }
 
 /* Hide scrollbar for webkit browsers (Chrome, Safari) */

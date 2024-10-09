@@ -6,6 +6,11 @@
   <input type="text" [(ngModel)]="newVideo.title" placeholder="Video Title" required />
   <input type="text" [(ngModel)]="newVideo.link" placeholder="Video Link" required />
 
+  <!-- Display error message -->
+  <div *ngIf="errorMessage" class="error-message" style="color: red;">
+    {{ errorMessage }}
+  </div>
+
   <!-- Dropdown for selecting category -->
   <select [(ngModel)]="newVideo.category" required class="custom-select">
     <option value="" disabled>Select a category</option>

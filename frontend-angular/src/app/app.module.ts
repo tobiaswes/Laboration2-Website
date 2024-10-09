@@ -16,6 +16,8 @@ import {FormsModule} from "@angular/forms";
 import { LoginComponent } from './login/login.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { SearchbarComponent } from './searchbar/searchbar.component';
+import { SignupComponent } from './signup/signup.component';
+
 
 const routes: Routes = [
 
@@ -30,7 +32,8 @@ const routes: Routes = [
     FooterComponent,
     LoginComponent,
     UserProfileComponent,
-    SearchbarComponent
+    SearchbarComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,

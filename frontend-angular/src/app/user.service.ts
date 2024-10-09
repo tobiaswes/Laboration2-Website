@@ -1,46 +1,73 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject} from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
+import { HttpClient } from '@angular/common/http';
+import { map, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   private currentUser: { username: string } | null = null;
-  private isLoggedInSubject = new BehaviorSubject<boolean>(this.isLoggedIn()); // Initial value from sessionStorage
+  private isLoggedInSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
 
   // Observable for the login state
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
-  // Simulate login by setting the username and password
-  login(username: string, password: string): boolean {
-    const validCredentials = {
-      username: 'test',
-      password: '123'
-    };
+  constructor(private http: HttpClient) {}
 
-    // Check if the provided username and password match the valid credentials
-    if (username === validCredentials.username && password === validCredentials.password) {
-      // Store the username in sessionStorage
-      sessionStorage.setItem('user', username);
-      this.isLoggedInSubject.next(true);
-      return true; // Login successful
-    }
-    return false; // Login failed
+  // Backend login URL
+  private loginUrl = 'http://localhost:8080/auth/login';
+
+  // Login function using backend validation
+  login(username: string, password: string): Observable<boolean> {
+    console.log('Attempting to login with username:', username, 'and password:', password); // Log the input
+
+    return this.http.post<{ message: string }>(this.loginUrl, { username, password })
+      .pipe(
+        map(response => {
+          console.log('Login response from server:', response); // Log the server response
+
+          if (response.message === 'Login successful') {
+            console.log('Login successful! Storing user in sessionStorage');
+            sessionStorage.setItem('user', username);
+            this.isLoggedInSubject.next(true);
+            return true;
+          } else {
+            console.log('Login failed: invalid credentials');
+            return false;
+          }
+        }),
+        catchError(error => {
+          console.error('Error occurred during login:', error); // Log any errors from the HTTP call
+          return of(false); // Return false in case of an error
+        })
+      );
+  }
+
+  signUp(username: string, password: string): Observable<boolean> {
+    return this.http.post<{ message: string }>('http://localhost:8080/users/signup', { username, password })
+      .pipe(
+        map(response => response.message === 'Sign-up successful'),
+        catchError(error => {
+          console.error('Error during sign-up:', error);
+          return of(false);
+        })
+      );
   }
 
   isLoggedIn(): boolean {
     const user = sessionStorage.getItem('user');
-    console.log('User in session storage:', user); // Log the username
-    return user !== null; // Return true if the user is logged in
+    return user !== null;
   }
 
   getCurrentUser(): string | null {
-    return sessionStorage.getItem('user'); // Retrieve the current user from sessionStorage
+    return sessionStorage.getItem('user');
   }
 
-  // Log out the user
   logout(): void {
-    sessionStorage.removeItem('user'); // Clear the user from sessionStorage
+    console.log('Logging out, removing user from sessionStorage');
+    sessionStorage.removeItem('user');
     this.isLoggedInSubject.next(false);
   }
 }

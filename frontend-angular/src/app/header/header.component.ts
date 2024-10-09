@@ -29,11 +29,15 @@ export class HeaderComponent {
   goHome() {
     this.router.navigate(['/']);
   }
+  navigateToSignUp(): void {
+    this.router.navigate(['/signup']);  // Replace '/signup' with your sign-up route
+  }
 
   navigateToLogin(): void {
     if (this.isLoggedIn) {
       this.userService.logout(); // Log the user out
-      this.isLoggedIn = false; // Update the login status
+      this.isLoggedIn = false;
+      this.router.navigate(['/']);// Update the login status
     } else {
       this.router.navigate(['/login']); // Navigate to the login page
     }

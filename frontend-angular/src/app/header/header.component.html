@@ -1,6 +1,13 @@
 <div class="header">
-  <h1 class="title" (click)="goHome()">Archive 9</h1>
+  <h1 class="title" (click)="goHome()">Archive 23</h1>
   <div class="header-right">
+
+    <!-- Only show the Sign Up link when the user is not logged in -->
+    <ng-container *ngIf="!isLoggedIn">
+      <a class="signup-link" (click)="navigateToSignUp()" style="cursor: pointer; display: block; color: white">
+        Sign Up
+      </a>
+    </ng-container>
     <!-- Search Bar Container -->
     <app-searchbar (searchEvent)="handleSearch($event)"></app-searchbar>
 
@@ -20,6 +27,7 @@
       <button class="login-button" (click)="navigateToLogin()">
         Log in
       </button>
+      <!-- Add Sign Up link under the Log in button -->
     </ng-template>
   </div>
 </div>
