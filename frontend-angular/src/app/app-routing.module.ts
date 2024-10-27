@@ -9,8 +9,8 @@ import {SignupComponent} from "./signup/signup.component";
 const routes: Routes = [
   { path: '', component: NavbarComponent  }, // Default route for home
   { path: 'videos/category/:category', component: VideoListComponent }, // Route for filtering videos by category
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
+  { path: 'login', component: LoginComponent }, //login router
+  { path: 'signup', component: SignupComponent }, //sign up router
   { path: 'userProfile', component: UserProfileComponent },
   { path: '**', redirectTo: '' }, // Redirect any unknown paths to home
 ];

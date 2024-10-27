@@ -19,18 +19,17 @@ public class VideoService {
         this.videoRepository = videoRepository;
     }
 
-    //hämtar alla videos
+    // get all videos
     public List<Video> getAllVideos(){
         return videoRepository.findAll();
     }
 
-    //ladda up ny video
-
+    // Add a new video
     public Video createVideo(String title, String link, String addedBy, String category, String description){
         Video video = new Video(null, title, link, LocalDateTime.now(), addedBy, category, description);
         return videoRepository.save(video);
     }
-    //uppdatera en video
+    // Update an existing video
     public Video updateVideo(Long id, String title, String link, String addedBy, String category, String description){
         Optional<Video> existingVideo = videoRepository.findById(id);
 
@@ -48,7 +47,7 @@ public class VideoService {
         }
 
     }
-    //ta bort en video
+    // Delete a video
     public void deleteVideo(Long id){
         if(videoRepository.existsById(id)){
             videoRepository.deleteById(id);
@@ -56,12 +55,13 @@ public class VideoService {
             throw new RuntimeException("Video not found by id:" + id);
         }
     }
-
+    // Retrieve videos by a specific user
     public List<Video> getVideosByUser(String username) {
         return videoRepository.findByAddedBy(username);
     }
-    //sök efter video titeln
+    // Search videos by title keyword
     public List<Video> searchVideosByTitle(String keyword) {
+
         return videoRepository.searchByTitle(keyword);
     }
 }

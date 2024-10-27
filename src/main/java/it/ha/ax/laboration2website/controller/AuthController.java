@@ -18,12 +18,13 @@ public class AuthController {
         this.userService = userService;
     }
 
+    // Login endpoint to authenticate a user
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         System.out.println("Login request received for username: " + loginRequest.getUsername());
-
+        // Validate the provided credentials using the user service
         boolean valid = userService.validateCredentials(loginRequest.getUsername(), loginRequest.getPassword());
-
+        // Check if the credentials are valid
         if (valid) {
             System.out.println("Login successful for username: " + loginRequest.getUsername());
             return ResponseEntity.ok("{\"message\": \"Login successful\"}");

@@ -19,7 +19,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    // Sign-up endpoint
+    // Sign-up endpoint to register a new user
     @PostMapping("/signup")
     public ResponseEntity<?> signUpUser(@RequestBody User user) {
         try {

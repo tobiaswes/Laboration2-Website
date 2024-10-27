@@ -16,7 +16,7 @@ public class UserService {
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
+    //Registers a new user
     public User registerUser(User user) throws Exception {
         // Check if the username already exists
         Optional<User> existingUser = userRepository.findByUsername(user.getUsername());
@@ -29,12 +29,12 @@ public class UserService {
         user.setPassword(encodedPassword);
         return userRepository.save(user);
     }
-
+    //Finds a user by their username
     public Optional<User> findByUsername(String username) {
         System.out.println("Searching for user with username: " + username);
         return userRepository.findByUsername(username);
     }
-
+    // Validates the provided credentials by checking the username and password.
     public boolean validateCredentials(String username, String rawPassword) {
         Optional<User> user = findByUsername(username);
         if (user.isPresent()) {
@@ -43,6 +43,7 @@ public class UserService {
             System.out.println("Password match result: " + matches);
             return matches;
         }
+        // If the user does not exist, return false
         System.out.println("User not found: " + username);
         return false;
     }

@@ -1,10 +1,13 @@
+<!-- Main header component -->
 <app-header (searchEvent)="handleSearch($event)"></app-header>
 <!-- Navigation bar for video categories -->
 
 <body class="body">
+<!-- Outlet for routing; renders the appropriate component based on the current route -->
 <router-outlet></router-outlet>
 </body>
 
+<!-- Footer component for the application -->
 <app-footer></app-footer>
 
 

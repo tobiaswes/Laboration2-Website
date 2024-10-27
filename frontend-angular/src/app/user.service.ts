@@ -45,6 +45,7 @@ export class UserService {
       );
   }
 
+  // Sign-up function for creating a new user
   signUp(username: string, password: string): Observable<boolean> {
     return this.http.post<{ message: string }>('http://localhost:8080/users/signup', { username, password })
       .pipe(
@@ -56,15 +57,18 @@ export class UserService {
       );
   }
 
+  // Check if a user is currently logged in
   isLoggedIn(): boolean {
     const user = sessionStorage.getItem('user');
     return user !== null;
   }
 
+  // Retrieve the current logged-in user's username
   getCurrentUser(): string | null {
     return sessionStorage.getItem('user');
   }
 
+  // Log out the current user
   logout(): void {
     console.log('Logging out, removing user from sessionStorage');
     sessionStorage.removeItem('user');

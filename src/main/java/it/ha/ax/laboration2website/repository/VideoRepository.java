@@ -14,7 +14,7 @@ public interface VideoRepository extends JpaRepository<Video, Long> {
     // Search videos by title containing the search term (case-insensitive)
     @Query("SELECT v FROM Video v WHERE LOWER(v.title) LIKE LOWER(CONCAT('%', :keyword, '%'))")
     List<Video> searchByTitle(@Param("keyword") String keyword);
-
+    // Find all videos added by a specific user
     List<Video> findByAddedBy(String addedBy);
 
 }
